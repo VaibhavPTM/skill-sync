@@ -34,6 +34,7 @@ public class JobController {
         }
     }
 
+    // update job by job id
     @PutMapping("/updatejob/{jobId}")
     public ResponseEntity<Job> updateJobById(@PathVariable Long jobId, @RequestBody Map<String, Object> body) {
         try {
@@ -44,7 +45,7 @@ public class JobController {
             return ResponseEntity.notFound().build();
         }
     }
-    // deelete job by jobId
+    // delete job by jobId
     @DeleteMapping("deletejob/{jobId}")
     public ResponseEntity<Map<String, String>> deleteJob(@PathVariable Long jobId) {
         jobSerivice.deleteJob(jobId);
