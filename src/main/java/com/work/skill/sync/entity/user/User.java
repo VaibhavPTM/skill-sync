@@ -3,6 +3,7 @@ import com.work.skill.sync.entity.skill.Skill;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.springframework.context.annotation.Bean;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -33,13 +34,12 @@ public class User {
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    // Relationship with skills
+//     Relationship with skills
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserSkill> skills = new HashSet<>();
 
-    String sk;
-    // Getters and setters, constructors, toString() method
-    // Omitted for brevity
+
+    private String sk;
 
     // Add methods to manage skills
     public void addSkill(Skill skill) {

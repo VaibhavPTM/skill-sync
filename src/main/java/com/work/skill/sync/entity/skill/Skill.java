@@ -22,7 +22,7 @@ public class Skill {
     private String name;
 
     // Relationship with users
-    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "skill", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<UserSkill> users = new HashSet<>();
 
     public Long getId() {

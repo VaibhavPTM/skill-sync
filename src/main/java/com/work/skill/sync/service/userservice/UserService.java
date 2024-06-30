@@ -8,6 +8,7 @@ import java.util.Optional;
 
 public interface UserService {
     public User findByUsername(String username);
+    public User findUserById(Long Id);
     public User registerUser(User newUser);
     public User loginUser(String username, String password);
     public String getSkillsForUser(Long userId);

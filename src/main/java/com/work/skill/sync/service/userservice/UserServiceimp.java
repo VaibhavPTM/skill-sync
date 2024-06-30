@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @Service
 public class UserServiceimp implements UserService {
@@ -32,6 +33,14 @@ public class UserServiceimp implements UserService {
             throw new RuntimeException("User with username " + username + " does not exist");
         }
         return user;
+    }
+
+    public User findUserById(Long Id) {
+        Optional<User> user = userRepository.findById(Id);
+        if(user.get() == null) {
+            throw new RuntimeException("User with userid " + Id + " does not exist");
+        }
+        return user.get();
     }
 
     public User registerUser(User newUser) {

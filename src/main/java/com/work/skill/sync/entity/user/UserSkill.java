@@ -9,11 +9,11 @@ public class UserSkill {
     @EmbeddedId
     private UserSkillId id = new UserSkillId();
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("userId")
     private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @MapsId("skillId")
     private Skill skill;
 

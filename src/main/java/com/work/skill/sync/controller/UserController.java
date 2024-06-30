@@ -56,6 +56,7 @@ public class UserController {
             newUser.setAge(Integer.valueOf(body.get("age").toString()));
             newUser.setDescription(body.get("description").toString());
             String sk = body.get("skills").toString();
+            newUser.setSk(sk);
             String [] tmp = sk.split(",");
             {
                 // add userdata to user table
@@ -67,10 +68,9 @@ public class UserController {
             }
             {
                 // add skills to user_skills table
-//                System.out.println("Yes");
                 userSkillService.addUserSkill(newUser, sk);
             }
-            newUser.setSk(sk);
+
             return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
         } catch (RuntimeException e) {
             System.out.println(e.toString());
