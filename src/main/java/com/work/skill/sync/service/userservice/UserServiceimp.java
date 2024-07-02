@@ -1,4 +1,5 @@
 package com.work.skill.sync.service.userservice;
+import com.work.skill.sync.entity.address.Address;
 import com.work.skill.sync.entity.user.User;
 import com.work.skill.sync.repository.skillrepo.SkillRepository;
 import com.work.skill.sync.repository.userrepo.UserRepository;
@@ -92,6 +93,18 @@ public class UserServiceimp implements UserService {
         if (updates.containsKey("description")) {
             user.setDescription(updates.get("description").toString());
         }
+        Address address = user.getAddress();
+        if(updates.containsKey("city"))
+            address.setCity(updates.get("city").toString());
+        if(updates.containsKey("country"))
+            address.setCountry(updates.get("country").toString());
+        if(updates.containsKey("postal_code"))
+            address.setPostalCode(updates.get("postal_code").toString());
+        if(updates.containsKey("state"))
+            address.setState(updates.get("state").toString());
+        if(updates.containsKey("street"))
+            address.setStreet(updates.get("street").toString());
+        user.setAddress(address);
         if (updates.containsKey("sk")) {
             String sk = updates.get("sk").toString();
             userSkillService.removeAllSkillsByUserId(userId);

@@ -1,4 +1,5 @@
 package com.work.skill.sync.entity.user;
+import com.work.skill.sync.entity.address.Address;
 import com.work.skill.sync.entity.skill.Skill;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -119,8 +120,28 @@ public class User {
         this.description = description;
     }
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
+
     public Set<UserSkill> getSkills() {
         return skills;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 
     public void setSkills(Set<UserSkill> skills) {

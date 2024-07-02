@@ -1,5 +1,6 @@
 package com.work.skill.sync.controller;
 
+import com.work.skill.sync.entity.address.Address;
 import com.work.skill.sync.entity.user.User;
 import com.work.skill.sync.entity.user.UserSkill;
 import com.work.skill.sync.service.skillserivece.SkillService;
@@ -57,6 +58,13 @@ public class UserController {
             newUser.setDescription(body.get("description").toString());
             String sk = body.get("skills").toString();
             newUser.setSk(sk);
+            Address address = new Address();
+            address.setCity(body.get("city").toString());
+            address.setCountry(body.get("country").toString());
+            address.setPostalCode(body.get("postal_code").toString());
+            address.setState(body.get("state").toString());
+            address.setStreet(body.get("street").toString());
+            newUser.setAddress(address);
             String [] tmp = sk.split(",");
             {
                 // add userdata to user table
@@ -125,7 +133,7 @@ public class UserController {
         }
     }
 
-    // update user by username
+    // update user by userid
     @PutMapping("/{userId}")
     public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody Map<String, Object> updates) {
         try {

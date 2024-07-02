@@ -1,5 +1,6 @@
 package com.work.skill.sync.entity.job;
 
+import com.work.skill.sync.entity.address.Address;
 import com.work.skill.sync.entity.skill.Skill;
 import com.work.skill.sync.entity.user.User;
 import jakarta.persistence.*;
@@ -21,8 +22,9 @@ public class Job {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = false)
-    private String location;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    private Address address;
 
     @Column(nullable = false)
     private Double longitude;
@@ -90,14 +92,6 @@ public class Job {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
     }
 
     public Double getLongitude() {
@@ -178,5 +172,13 @@ public class Job {
 
     public void setSk(String sk) {
         this.sk = sk;
+    }
+
+    public Address getAddress() {
+        return address;
+    }
+
+    public void setAddress(Address address) {
+        this.address = address;
     }
 }

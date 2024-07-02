@@ -1,5 +1,6 @@
 package com.work.skill.sync.service.jobservice;
 
+import com.work.skill.sync.entity.address.Address;
 import com.work.skill.sync.entity.exception.ResourceNotFoundException;
 import com.work.skill.sync.entity.job.Job;
 import com.work.skill.sync.entity.user.User;
@@ -38,7 +39,6 @@ public class JobServiceImp implements JobSerivice{
                 Job job = new Job();
                 job.setTitle(body.get("title").toString());
                 job.setDescription(body.get("description").toString());
-                job.setLocation(body.get("location").toString());
                 job.setLongitude(Double.valueOf(body.get("longitude").toString()));
                 job.setLatitude(Double.valueOf(body.get("latitude").toString()));
                 job.setDressCode(body.get("dressCode").toString());
@@ -48,6 +48,13 @@ public class JobServiceImp implements JobSerivice{
                 job.setStatus(body.get("status").toString());
                 job.setPoster(userRepository.findById(userId).get());
                 job.setSk(body.get("sk").toString());
+                Address address = new Address();
+                address.setCity(body.get("city").toString());
+                address.setCountry(body.get("country").toString());
+                address.setPostalCode(body.get("postal_code").toString());
+                address.setState(body.get("state").toString());
+                address.setStreet(body.get("street").toString());
+                job.setAddress(address);
                 {
                     jobRepository.save(job);
                     skillService.addSkills(job.getSk());
@@ -69,7 +76,6 @@ public class JobServiceImp implements JobSerivice{
             Job job = jobRepository.findById(jobId).get();
             job.setTitle(body.get("title").toString());
             job.setDescription(body.get("description").toString());
-            job.setLocation(body.get("location").toString());
             job.setLongitude(Double.valueOf(body.get("longitude").toString()));
             job.setLatitude(Double.valueOf(body.get("latitude").toString()));
             job.setDressCode(body.get("dressCode").toString());
@@ -78,6 +84,13 @@ public class JobServiceImp implements JobSerivice{
             job.setEndDate(body.get("endDate").toString());
             job.setStatus(body.get("status").toString());
             job.setSk(body.get("sk").toString());
+            Address address = job.getAddress();
+            address.setCity(body.get("city").toString());
+            address.setCountry(body.get("country").toString());
+            address.setPostalCode(body.get("postal_code").toString());
+            address.setState(body.get("state").toString());
+            address.setStreet(body.get("street").toString());
+            job.setAddress(address);
             {
                 // remove skills with jobId
                 jobSkillService.removeAllSkillsByJobId(jobId);
