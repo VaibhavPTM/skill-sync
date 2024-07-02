@@ -4,6 +4,7 @@ import com.work.skill.sync.entity.skill.Skill;
 import com.work.skill.sync.entity.user.User;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -58,6 +59,13 @@ public class Job {
 
     private String sk;
 
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 
 
     public Long getId() {

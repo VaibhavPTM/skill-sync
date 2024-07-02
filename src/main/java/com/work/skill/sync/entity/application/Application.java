@@ -4,6 +4,8 @@ import com.work.skill.sync.entity.job.Job;
 import com.work.skill.sync.entity.user.User;
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "application")
 public class Application {
@@ -22,6 +24,14 @@ public class Application {
 
     @Column(nullable = false)
     private String status;
+
+    @Column(name = "created_at", nullable = false, updatable = false)
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    protected void onCreate() {
+        createdAt = LocalDateTime.now();
+    }
 
     // Getters and setters
     public Long getId() {
