@@ -116,6 +116,18 @@ public class JobController {
         return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
+    @GetMapping("search/{skillId}")
+    ResponseEntity<List<Job>> searchJobSkillId(@PathVariable Long skillId) {
+        try {
+            List<Job> jobList = jobSerivice.searchJobBySkillId(skillId);
+            return ResponseEntity.ok(jobList);
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+        }
+    }
+
 
 
     @GetMapping("/test")

@@ -107,4 +107,9 @@ public class UserServiceimp implements UserService {
         }
         return userRepository.save(user);
     }
+
+    @Override
+    public List<User> searchUserBySkillId(Long skillId) {
+        return userRepository.findUserBySkillId(skillId);
+    }
 }

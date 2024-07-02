@@ -113,6 +113,18 @@ public class UserController {
         }
     }
 
+    @GetMapping("/search/{skillId}")
+    public ResponseEntity<List<User>> searchUserBySkillId(@PathVariable Long skillId) {
+        try {
+            List<User> userList = userService.searchUserBySkillId(skillId);
+            return ResponseEntity.ok(userList);
+        }
+        catch (Exception e) {
+            System.out.println(e.toString());
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
+        }
+    }
+
     // update user by username
     @PutMapping("/{userId}")
     public ResponseEntity<User> updateUser(@PathVariable Long userId, @RequestBody Map<String, Object> updates) {
@@ -126,6 +138,9 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(u1);
         }
     }
+
+
+
 
     // it is just a testing api you can ignore it
     @GetMapping("/test")

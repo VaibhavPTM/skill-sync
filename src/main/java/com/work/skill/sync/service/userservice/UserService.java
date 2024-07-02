@@ -16,4 +16,6 @@ public interface UserService {
     List<User> findAllUsers();
 
     User updateUser(Long userId, Map<String, Object> updates);
+
+    List<User> searchUserBySkillId(Long skillId);
 }

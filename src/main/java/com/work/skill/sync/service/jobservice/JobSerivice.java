@@ -24,4 +24,6 @@ public interface JobSerivice {
     void updateExpiredJobs();
 
     List<Job> getAllJobByUserId(Long userId);
+
+    List<Job> searchJobBySkillId(Long skillId);
 }

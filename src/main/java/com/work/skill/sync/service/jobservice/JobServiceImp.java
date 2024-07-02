@@ -132,6 +132,11 @@ public class JobServiceImp implements JobSerivice{
     }
 
     @Override
+    public List<Job> searchJobBySkillId(Long skillId) {
+        return jobRepository.findBySkillId(skillId);
+    }
+
+    @Override
     public List<Job> findAllJobs() {
         try {
             return jobRepository.findAll();
